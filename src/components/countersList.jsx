@@ -22,12 +22,28 @@ const CountersList = () => {
   };
 
   const handleIncrement = (id) => {
-    console.log("handle Increment");
+    const newIncreaseArray = counters.map((elem) => {
+      if (elem.id === id) {
+        return { ...(counters[elem.id].value += 1), ...elem };
+      }
+      return elem;
+    });
+    setCounters(newIncreaseArray);
   };
 
-  const handleDecrement = () => {
-    console.log("handle decrement");
-    //setCounters((prevState) => prevState - 1);
+  const handleDecrement = (id) => {
+    const newDecreaseArray = counters.map((elem) => {
+      if (elem.id === id) {
+        return {
+          ...(counters[elem.id].value > 0
+            ? (counters[elem.id].value -= 1)
+            : (counters[elem.id].value = 0)),
+          ...elem,
+        };
+      }
+      return elem;
+    });
+    setCounters(newDecreaseArray);
   };
 
   return (
